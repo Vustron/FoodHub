@@ -7,6 +7,7 @@ import { Urbanist } from "next/font/google";
 import { cn } from "@/lib/helpers/utils";
 import type { Metadata } from "next";
 import "./globals.css";
+import Footer from "@/components/shared/footer";
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 
@@ -43,6 +44,9 @@ export default function RootLayout({
             {/* Header */}
             <Header userId={userId} />
             {children}
+
+            {/* Footer */}
+            <Footer />
           </QueryProvider>
         </body>
       </html>

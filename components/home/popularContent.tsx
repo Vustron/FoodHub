@@ -16,6 +16,15 @@ const PopularContent = ({ data }: Props) => {
   // add to wishlist state
   const [isLiked, setIsLiked] = useState(false);
 
+  // wishlist handler
+  const likeHandler = () => {
+    if (!isLiked) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  };
+
   return (
     <Card className="relative flex max-h-[340px] flex-col items-center justify-center rounded-md border-none bg-white py-6 pt-24 shadow-lg md:pt-28">
       <div className="absolute -top-[4%] flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-hero p-1 md:-top-[20%] md:h-40 md:w-40 md:p-2">
@@ -90,14 +99,17 @@ const PopularContent = ({ data }: Props) => {
       {/* add to wishlist */}
       <Button
         variant="ghost"
-        className="absolute left-0 top-0 hover:bg-transparent"
+        className="absolute left-0 top-0 transition hover:scale-110 hover:bg-transparent"
+        onClick={likeHandler}
       >
         {isLiked ? (
           <>
-            <Heart className="size-4 text-red-500" />
+            <Heart className="size-6 text-red-500" />
           </>
         ) : (
-          <></>
+          <>
+            <HeartCrack className="size-6" />
+          </>
         )}
       </Button>
     </Card>
