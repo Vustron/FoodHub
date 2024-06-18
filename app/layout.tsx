@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   description: "Have foods and share love",
 };
 
+export const revalidate = 0;
+
 export default function RootLayout({
   children,
 }: Readonly<{
