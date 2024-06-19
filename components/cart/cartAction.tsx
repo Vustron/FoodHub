@@ -7,15 +7,15 @@ import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 
 const CartActionButton = () => {
-  // // hydration fix
-  // const isMounted = useMounted();
+  // hydration fix
+  const isMounted = useMounted();
 
   const cart = useCart();
   const router = useRouter();
 
-  // if (!isMounted) {
-  //   return null;
-  // }
+  if (!isMounted) {
+    return null;
+  }
   return (
     <div className="ml-4 flex items-center justify-center gap-x-4">
       <Button

@@ -33,7 +33,7 @@ const CartItem = ({ item }: Props) => {
           alt={item.name}
           fill
           className="size-full object-contain transition hover:scale-110"
-          loading="lazy"
+          priority
           sizes="100vh"
         />
       </div>

@@ -25,3 +25,6 @@ export const CUISINES_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/stores/${PRO
 
 // product id
 export const PRODUCT_ID_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/stores/${PRODUCT_STORE}/products/`;
+
+// orders
+export const CHECKOUT_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/stores/${PRODUCT_STORE}/checkout`;

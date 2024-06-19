@@ -10,7 +10,7 @@ export default function CartPage() {
   const { userId } = auth();
 
   return (
-    <div className="h-[80vh]">
+    <div className="h-auto">
       <Container className="my-4 h-full bg-white py-12">
         <div className="size-full space-y-7 px-4 md:px-12">
           <Box className="items-center text-sm text-neutral-700">

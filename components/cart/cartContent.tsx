@@ -1,7 +1,9 @@
 "use client";
 
+import { CHECKOUT_URL, PRODUCT_STORE } from "@/lib/helpers/utils";
 import { ScrollArea } from "@/components/ui/scrollArea";
 import { Separator } from "@/components/ui/separator";
+import { usePost } from "@/lib/hooks/api/usePost";
 import { useSearchParams } from "next/navigation";
 import CartItem from "@/components/cart/cartItem";
 import { Button } from "@/components/ui/button";
@@ -27,23 +29,34 @@ const CartContent = ({ userId }: Props) => {
     return total + Number(item.price * item.qty!);
   }, 0);
 
-  // useEffect(() => {
-  //   if (searchParams.get("success")) {
-  //     toast.success("Payment completed");
-  //   }
+  useEffect(() => {
+    if (searchParams.get("success")) {
+      toast.success("Payment completed");
+      cart.removeAll();
+    }
 
-  //   if (searchParams.get("canceled")) {
-  //     toast.error("Something went wrong try again later");
-  //   }
-  // }, [searchParams, cart.removeAll()]);
+    if (searchParams.get("canceled")) {
+      toast.error("Something went wrong try again later");
+    }
+  }, [searchParams]);
+
+  // checkout
+  const props = {
+    STORE: PRODUCT_STORE,
+    URL: CHECKOUT_URL,
+    queryKey: "checkout",
+    values: cart.items,
+    userId: userId,
+  };
+  const checkout = usePost(props);
 
   // checkout handler
   const onCheckout = async () => {
-    console.log("checkout");
+    checkout.mutateAsync();
   };
   return (
     <>
-      <div className="flex w-full items-center justify-between gap-4">
+      <div className="flex h-auto w-full items-center justify-between gap-4">
         <h2 className="text-2xl font-semibold text-neutral-700">Cart Items</h2>
 
         {cart.items.length > 0 && (
@@ -57,9 +70,9 @@ const CartContent = ({ userId }: Props) => {
         )}
       </div>
 
-      <div className="w-full lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-8">
+      <div className="h-auto w-full lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-8">
         <div className="col-span-8">
-          <ScrollArea className="h-72 w-full rounded-md border">
+          <ScrollArea className="h-72 w-full">
             {cart.items.length === 0 && (
               <div className="flex w-full items-center justify-center">
                 <span className="mt-20 text-3xl font-semibold text-neutral-600">

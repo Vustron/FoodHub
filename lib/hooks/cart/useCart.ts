@@ -35,7 +35,6 @@ const useCart = create(
 
       removeAll: () => {
         set({ items: [] });
-        toast.success("Removed all items");
       },
 
       updateItemQuantity: (id: string | undefined, qty: number) => {
