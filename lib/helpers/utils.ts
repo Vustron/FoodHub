@@ -22,3 +22,6 @@ export const KITCHENS_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/stores/${PRO
 
 // cuisines
 export const CUISINES_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/stores/${PRODUCT_STORE}/cuisines`;
+
+// product id
+export const PRODUCT_ID_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/stores/${PRODUCT_STORE}/products/`;

@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import qs from "query-string";
 import axios from "axios";
 
@@ -14,42 +14,32 @@ interface Props<T> {
   STORE?: string;
   URL?: string;
   queryKey?: string;
-  type?: T;
 }
 
 export const useGet = <T>(query: Query, props: Props<T>) => {
-  const queryClient = useQueryClient();
+  // extract props
+  const { STORE, URL, queryKey } = props;
+  // extract query
   const { size, isFeatured, cuisine, category, kitchen } = query;
 
   // query string url
   const url = qs.stringifyUrl({
-    url: props.URL!,
-    query: { size, isFeatured, cuisine, category, kitchen },
+    url: URL!,
+    query: {
+      size: size,
+      isFeatured: isFeatured,
+      cuisine: cuisine,
+      category: category,
+      kitchen: kitchen,
+    },
   });
 
-  const fetchQueryData = async () => {
-    const { data } = await axios.get(url);
-    return data;
-  };
-
-  // Clear cache and refetch function
-  const clearCacheAndRefetch = async () => {
-    await queryClient.invalidateQueries({
-      queryKey: [props.queryKey, props.STORE],
-    });
-    queryClient.setQueryData(
-      [props.queryKey, props.STORE, query],
-      fetchQueryData,
-    );
-  };
-
-  const queryData = useQuery<T[]>({
-    queryKey: [props.queryKey, props.STORE, query],
-    queryFn: fetchQueryData,
+  return useQuery<T[]>({
+    queryKey: [queryKey, STORE, query],
+    enabled: !!STORE,
+    queryFn: async () => {
+      const { data } = await axios.get(url);
+      return data;
+    },
   });
-
-  return {
-    ...queryData,
-    clearCacheAndRefetch,
-  };
 };
