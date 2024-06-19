@@ -1,9 +1,9 @@
 "use client";
 
 import { useGetOrders } from "@/lib/hooks/api/useGetOrders";
+import { ChevronRight, Home, Loader2 } from "lucide-react";
 import OrderItems from "@/components/orders/orderItems";
 import Container from "@/components/shared/container";
-import { ChevronRight, Home } from "lucide-react";
 import Box from "@/components/shared/box";
 import Link from "next/link";
 
@@ -40,7 +40,9 @@ const OrdersContent = ({ userId }: Props) => {
 
       <h2 className="my-4 text-xl font-semibold text-neutral-700">My Orders</h2>
       {loading ? (
-        <span>...loading orders</span>
+        <Box className="flex-start flex">
+          <Loader2 className="h-6 animate-spin" />
+        </Box>
       ) : error ? (
         <span>Something went wrong {error.message}</span>
       ) : (

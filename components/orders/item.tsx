@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badges";
 import { Order } from "@/lib/helpers/types";
 import Box from "@/components/shared/box";
 import Image from "next/image";
+import { cn } from "@/lib/helpers/utils";
 
 interface Props {
   order: Order;
@@ -43,7 +44,7 @@ const Item = ({ order }: Props) => {
                   fill
                   loading="lazy"
                   sizes="100vh"
-                  className="size-fill object-contain"
+                  className="size-fill object-contain transition hover:scale-110"
                 />
               </div>
             </>
@@ -58,14 +59,19 @@ const Item = ({ order }: Props) => {
           variant={getBadgeVariant(status)}
           className="mt-5 h-[30px] w-[100px] text-lg font-medium"
         >
-          {order.order_status}
+          <span className="ml-1 text-center">{order.order_status}</span>
         </Badge>
 
         <Badge
           variant={order.isPaid ? "success" : "destructive"}
-          className="mt-5 h-[30px] w-[60px] text-lg font-medium"
+          className={cn(
+            "mt-5 h-[30px] text-lg font-medium",
+            order.isPaid ? "w-[70px]" : "w-[100px]",
+          )}
         >
-          {order.isPaid ? "Paid" : "Not Paid"}
+          <span className="ml-2 text-center">
+            {order.isPaid ? "Paid" : "Not Paid"}
+          </span>
         </Badge>
       </div>
     </Box>

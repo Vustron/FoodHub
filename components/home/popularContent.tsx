@@ -3,11 +3,11 @@
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Heart, HeartCrack, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import useCart from "@/lib/hooks/cart/useCart";
 import { Product } from "@/lib/helpers/types";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import useCart from "@/lib/hooks/cart/useCart";
 
 interface Props {
   data: Product;

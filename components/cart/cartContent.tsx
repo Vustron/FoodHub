@@ -52,7 +52,11 @@ const CartContent = ({ userId }: Props) => {
 
   // checkout handler
   const onCheckout = async () => {
-    checkout.mutateAsync();
+    if (cart.items.length > 0) {
+      checkout.mutateAsync();
+    } else {
+      toast.error("Cart is empty");
+    }
   };
   return (
     <>

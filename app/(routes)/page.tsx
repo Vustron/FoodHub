@@ -1,30 +1,31 @@
 "use client";
 
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import ProductSkeleton from "@/components/shared/productSkeleton";
 import { PRODUCT_STORE, PRODUCT_URL } from "@/lib/helpers/utils";
 import PopularContent from "@/components/home/popularContent";
 import { FileHeart, Salad, Truck } from "lucide-react";
 import Container from "@/components/shared/container";
-import { products } from "@/lib/helpers/staticData";
 import { Button } from "@/components/ui/button";
 import { useGet } from "@/lib/hooks/api/useGet";
 import { Product } from "@/lib/helpers/types";
+import Box from "@/components/shared/box";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
-  // // set query
-  // const query = {
-  //   isFeatured: true,
-  // };
-  // // set query props
-  // const props = {
-  //   STORE: PRODUCT_STORE,
-  //   URL: PRODUCT_URL,
-  //   queryKey: "products",
-  // };
-  // // get products
-  // const { data = [], isLoading, error } = useGet<Product>(query, props);
+  // set query
+  const query = {
+    isFeatured: true,
+  };
+  // set query props
+  const props = {
+    STORE: PRODUCT_STORE,
+    URL: PRODUCT_URL,
+    queryKey: "products",
+  };
+  // get products
+  const { data = [], isLoading, error } = useGet<Product>(query, props);
 
   return (
     <>
@@ -79,19 +80,20 @@ export default function HomePage() {
 
         {/* popular section */}
         <section className="my-4 grid grid-cols-1 gap-6 gap-y-20 py-12 md:grid-cols-4 md:gap-12">
-          {/* {isLoading ? (
-            <span>...loading popular products</span>
+          {isLoading ? (
+            <Box className="col-span-12 flex-row items-start justify-start gap-8 md:col-span-10">
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+            </Box>
           ) : error ? (
             <span>Something went wrong {error.message}</span>
           ) : (
             data
               .slice(0, 4)
               .map((item) => <PopularContent key={item.id} data={item} />)
-          )} */}
-
-          {products.slice(0, 4).map((item) => (
-            <PopularContent key={item.id} data={item} />
-          ))}
+          )}
         </section>
 
         {/* why choose us */}

@@ -10,6 +10,7 @@ import {
 } from "@/lib/helpers/utils";
 
 import { Category, Cuisine, Kitchen, Product, Size } from "@/lib/helpers/types";
+import ProductSkeleton from "@/components/shared/productSkeleton";
 import FilterContainer from "@/components/menu/filterContainer";
 import CategoryFilters from "@/components/menu/categoryFilters";
 import ProductContent from "@/components/menu/productContent";
@@ -19,6 +20,7 @@ import SizeFilters from "@/components/menu/sizeFilters";
 import Container from "@/components/shared/container";
 import { useGet } from "@/lib/hooks/api/useGet";
 import Box from "@/components/shared/box";
+import { Loader2 } from "lucide-react";
 
 interface Props {
   searchParams: {
@@ -130,7 +132,9 @@ export default function MenuPage({ searchParams }: Props) {
         <div className="col-span-2 hidden border-r border-gray-100 md:block">
           <FilterContainer>
             {loading ? (
-              <span>...loading filters</span>
+              <Box className="flex-start flex">
+                <Loader2 className="h-6 animate-spin" />
+              </Box>
             ) : error ? (
               <span>Something went wrong: {error.message}</span>
             ) : (
@@ -146,7 +150,11 @@ export default function MenuPage({ searchParams }: Props) {
 
         <Box className="col-span-12 flex-col items-start justify-start md:col-span-10">
           {loading ? (
-            <span>...loading products</span>
+            <Box className="col-span-12 flex-row items-start justify-start gap-8 md:col-span-10">
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+            </Box>
           ) : error ? (
             <span>Something went wrong: {error.message}</span>
           ) : (
