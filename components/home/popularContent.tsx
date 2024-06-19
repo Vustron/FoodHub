@@ -7,6 +7,7 @@ import { Product } from "@/lib/helpers/types";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import useCart from "@/lib/hooks/cart/useCart";
 
 interface Props {
   data: Product;
@@ -23,6 +24,13 @@ const PopularContent = ({ data }: Props) => {
     } else {
       setIsLiked(false);
     }
+  };
+
+  // cart handler
+  const cart = useCart();
+
+  const addToCart = (data: Product) => {
+    cart.addItem({ ...data, qty: 1 });
   };
 
   return (
@@ -91,8 +99,11 @@ const PopularContent = ({ data }: Props) => {
         </Link>
       </div>
 
-      {/* add to card */}
-      <Button className="absolute right-0 top-0 rounded-br-none rounded-tl-none rounded-tr-lg p-2 px-3 transition hover:scale-110 hover:bg-hero">
+      {/* add to cart */}
+      <Button
+        onClick={() => addToCart(data)}
+        className="absolute right-0 top-0 rounded-br-none rounded-tl-none rounded-tr-lg p-2 px-3 transition hover:scale-110 hover:bg-hero"
+      >
         <ShoppingCart className="size-4" />
       </Button>
 

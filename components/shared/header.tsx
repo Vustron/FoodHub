@@ -1,6 +1,7 @@
 "use client";
 
 import { UserButton, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
+import CartActionButton from "@/components/cart/cartAction";
 import Container from "@/components/shared/container";
 import MainNav from "@/components/shared/mainNav";
 import { Button } from "@/components/ui/button";
@@ -84,6 +85,8 @@ const Header = ({ userId }: Props) => {
               </Link>
             </div>
           )}
+
+          {userId && <CartActionButton />}
         </div>
       </Container>
     </header>
