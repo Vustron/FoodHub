@@ -1,5 +1,6 @@
 import ToastProvider from "@/components/providers/toast_provider";
 import QueryProvider from "@/components/providers/query_provider";
+import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
@@ -7,7 +8,7 @@ import { Urbanist } from "next/font/google";
 import { cn } from "@/lib/helpers/utils";
 import type { Metadata } from "next";
 import "./globals.css";
-import Footer from "@/components/shared/footer";
+
 
 const urbanist = Urbanist({ subsets: ["latin"], variable: "--font-urbanist" });
 
